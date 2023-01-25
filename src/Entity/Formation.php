@@ -24,9 +24,13 @@ class Formation
     #[ORM\ManyToMany(targetEntity: Etablissement::class, mappedBy: 'formation')]
     private Collection $etablissement;
 
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: SiteWeb::class)]
+    private Collection $siteWeb;
+
     public function __construct()
     {
         $this->etablissement = new ArrayCollection();
+        $this->siteWeb = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,6 +84,36 @@ class Formation
     {
         if ($this->etablissement->removeElement($etablissement)) {
             $etablissement->removeFormation($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteWeb>
+     */
+    public function getSiteWeb(): Collection
+    {
+        return $this->siteWeb;
+    }
+
+    public function addSiteWeb(SiteWeb $siteWeb): self
+    {
+        if (!$this->siteWeb->contains($siteWeb)) {
+            $this->siteWeb->add($siteWeb);
+            $siteWeb->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteWeb(SiteWeb $siteWeb): self
+    {
+        if ($this->siteWeb->removeElement($siteWeb)) {
+            // set the owning side to null (unless already changed)
+            if ($siteWeb->getFormation() === $this) {
+                $siteWeb->setFormation(null);
+            }
         }
 
         return $this;

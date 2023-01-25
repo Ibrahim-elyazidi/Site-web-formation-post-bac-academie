@@ -16,6 +16,9 @@ class SiteWeb
     #[ORM\Column(length: 255)]
     private ?string $lien = null;
 
+    #[ORM\ManyToOne(inversedBy: 'siteWeb')]
+    private ?Formation $formation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class SiteWeb
     public function setLien(string $lien): self
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
 
         return $this;
     }
