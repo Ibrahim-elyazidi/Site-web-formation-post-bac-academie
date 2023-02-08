@@ -5,36 +5,57 @@
 
 {% block body %}
 <style>
-    .bigTitle { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .bigTitle { font: 18px/1.5 sans-serif; }
     .bigTitle code { background: #F5F5F5; padding: 2px 6px; }
     h1 {
-  font-size: calc(1.375rem + 1.5vw);
+  font-size: calc(0.5rem + 1.5vw);
   text-align: center;
     }
+    .navbar-brand {
+        color: white;
+    }
+
+    
 </style>
 
 <div class="bigTitle">
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" href="#">Formation post-bac</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-2 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Formations</a>
+          <a class="navbar-brand" aria-current="page" href="/accueil"><button class="btn" style="background-color:white;"><i class="fa fa-home"></i></button></a>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex " role="search">
+        <input class="form-control me-2" type="search" placeholder="Search formation ..." aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
   </div>
   </div>
 </nav>
-<center>
-    <h1 >Trouver toutes nos formations</h1>
-</center>
+<br><br><br>
+    <h1 >Rechercher une formation spécifique </h1>
+<br><br>
+<label for="formation" style="padding-left:430px;">Formation : </label>
+<select name="formation" id="formation">
+    <option value="bts">test1</option>
+    <option value="dcg">test2</option>
+    <option value="prepa ens D1">test3</option>
+    <option value="prepa ens D2">test4</option>
+    <option value="prepa ECT">test5</option>
+</select>
 
+
+<label for="Departement" style="padding-left:120px;">Département : </label>
+<select name="Departement" id="Departement">
+    <option value="77">d1</option>
+    <option value="94">d2</option>
+    <option value="93">d3</option>
+    
+</select>
 {% endblock %}

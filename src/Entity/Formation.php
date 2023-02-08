@@ -15,22 +15,26 @@ class Formation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 12)]
-    private ?string $intitule = null;
+    #[ORM\Column(length: 25)]
+    private ?string $intituleFormation = null;
 
     #[ORM\Column]
-    private ?int $duree = null;
+    private ?int $dureeFormation = null;
 
     #[ORM\ManyToMany(targetEntity: Etablissement::class, mappedBy: 'formation')]
     private Collection $etablissement;
 
-    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: SiteWeb::class)]
-    private Collection $siteWeb;
+    #[ORM\ManyToMany(targetEntity: Referent::class, inversedBy: 'formation')]
+    private Collection $referent;
+
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: FormationEtablissement::class)]
+    private Collection $formationEtablissement;
 
     public function __construct()
     {
         $this->etablissement = new ArrayCollection();
-        $this->siteWeb = new ArrayCollection();
+        $this->referent = new ArrayCollection();
+        $this->formationEtablissement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -38,26 +42,26 @@ class Formation
         return $this->id;
     }
 
-    public function getIntitule(): ?string
+    public function getIntituleFormation(): ?string
     {
-        return $this->intitule;
+        return $this->intituleFormation;
     }
 
-    public function setIntitule(string $intitule): self
+    public function setIntituleFormation(string $intituleFormation): self
     {
-        $this->intitule = $intitule;
+        $this->intituleFormation = $intituleFormation;
 
         return $this;
     }
 
-    public function getDuree(): ?int
+    public function getDureeFormation(): ?int
     {
-        return $this->duree;
+        return $this->dureeFormation;
     }
 
-    public function setDuree(int $duree): self
+    public function setDureeFormation(int $dureeFormation): self
     {
-        $this->duree = $duree;
+        $this->dureeFormation = $dureeFormation;
 
         return $this;
     }
@@ -90,29 +94,53 @@ class Formation
     }
 
     /**
-     * @return Collection<int, SiteWeb>
+     * @return Collection<int, Referent>
      */
-    public function getSiteWeb(): Collection
+    public function getReferent(): Collection
     {
-        return $this->siteWeb;
+        return $this->referent;
     }
 
-    public function addSiteWeb(SiteWeb $siteWeb): self
+    public function addReferent(Referent $referent): self
     {
-        if (!$this->siteWeb->contains($siteWeb)) {
-            $this->siteWeb->add($siteWeb);
-            $siteWeb->setFormation($this);
+        if (!$this->referent->contains($referent)) {
+            $this->referent->add($referent);
         }
 
         return $this;
     }
 
-    public function removeSiteWeb(SiteWeb $siteWeb): self
+    public function removeReferent(Referent $referent): self
     {
-        if ($this->siteWeb->removeElement($siteWeb)) {
+        $this->referent->removeElement($referent);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FormationEtablissement>
+     */
+    public function getFormationEtablissement(): Collection
+    {
+        return $this->formationEtablissement;
+    }
+
+    public function addFormationEtablissement(FormationEtablissement $formationEtablissement): self
+    {
+        if (!$this->formationEtablissement->contains($formationEtablissement)) {
+            $this->formationEtablissement->add($formationEtablissement);
+            $formationEtablissement->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormationEtablissement(FormationEtablissement $formationEtablissement): self
+    {
+        if ($this->formationEtablissement->removeElement($formationEtablissement)) {
             // set the owning side to null (unless already changed)
-            if ($siteWeb->getFormation() === $this) {
-                $siteWeb->setFormation(null);
+            if ($formationEtablissement->getFormation() === $this) {
+                $formationEtablissement->setFormation(null);
             }
         }
 

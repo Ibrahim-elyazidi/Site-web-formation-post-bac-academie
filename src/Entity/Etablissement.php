@@ -15,17 +15,22 @@ class Etablissement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 115)]
+    #[ORM\Column(length: 25)]
     private ?string $nomEtablissement = null;
 
-    #[ORM\Column(length: 145)]
+    #[ORM\Column(length: 70)]
     private ?string $adresseEtablissement = null;
 
     #[ORM\Column(length: 10)]
     private ?string $telephoneEtablissement = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $villeEtablissement = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $siteEtablissement = null;
+
     #[ORM\ManyToOne(inversedBy: 'etablissement')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Departement $departement = null;
 
     #[ORM\ManyToMany(targetEntity: Formation::class, inversedBy: 'etablissement')]
@@ -34,10 +39,14 @@ class Etablissement
     #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Referent::class)]
     private Collection $referent;
 
+    #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: FormationEtablissement::class)]
+    private Collection $formationEtablissement;
+
     public function __construct()
     {
         $this->formation = new ArrayCollection();
         $this->referent = new ArrayCollection();
+        $this->formationEtablissement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +86,30 @@ class Etablissement
     public function setTelephoneEtablissement(string $telephoneEtablissement): self
     {
         $this->telephoneEtablissement = $telephoneEtablissement;
+
+        return $this;
+    }
+
+    public function getVilleEtablissement(): ?string
+    {
+        return $this->villeEtablissement;
+    }
+
+    public function setVilleEtablissement(string $villeEtablissement): self
+    {
+        $this->villeEtablissement = $villeEtablissement;
+
+        return $this;
+    }
+
+    public function getSiteEtablissement(): ?string
+    {
+        return $this->siteEtablissement;
+    }
+
+    public function setSiteEtablissement(string $siteEtablissement): self
+    {
+        $this->siteEtablissement = $siteEtablissement;
 
         return $this;
     }
@@ -141,6 +174,36 @@ class Etablissement
             // set the owning side to null (unless already changed)
             if ($referent->getEtablissement() === $this) {
                 $referent->setEtablissement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FormationEtablissement>
+     */
+    public function getFormationEtablissement(): Collection
+    {
+        return $this->formationEtablissement;
+    }
+
+    public function addFormationEtablissement(FormationEtablissement $formationEtablissement): self
+    {
+        if (!$this->formationEtablissement->contains($formationEtablissement)) {
+            $this->formationEtablissement->add($formationEtablissement);
+            $formationEtablissement->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormationEtablissement(FormationEtablissement $formationEtablissement): self
+    {
+        if ($this->formationEtablissement->removeElement($formationEtablissement)) {
+            // set the owning side to null (unless already changed)
+            if ($formationEtablissement->getEtablissement() === $this) {
+                $formationEtablissement->setEtablissement(null);
             }
         }
 

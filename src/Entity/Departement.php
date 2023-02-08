@@ -16,10 +16,10 @@ class Departement
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $numDepartement = null;
+    private ?int $num = null;
 
     #[ORM\Column(length: 25)]
-    private ?string $nomDepartement = null;
+    private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Etablissement::class)]
     private Collection $etablissement;
@@ -34,26 +34,26 @@ class Departement
         return $this->id;
     }
 
-    public function getNumDepartement(): ?int
+    public function getNum(): ?int
     {
-        return $this->numDepartement;
+        return $this->num;
     }
 
-    public function setNumDepartement(int $numDepartement): self
+    public function setNum(int $num): self
     {
-        $this->numDepartement = $numDepartement;
+        $this->num = $num;
 
         return $this;
     }
 
-    public function getNomDepartement(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomDepartement;
+        return $this->nom;
     }
 
-    public function setNomDepartement(string $nomDepartement): self
+    public function setNom(string $nom): self
     {
-        $this->nomDepartement = $nomDepartement;
+        $this->nom = $nom;
 
         return $this;
     }

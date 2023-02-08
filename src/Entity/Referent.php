@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReferentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReferentRepository::class)]
@@ -13,71 +15,78 @@ class Referent
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $nomRef = null;
+    #[ORM\Column(length: 30)]
+    private ?string $nomReferent = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $prenomRef = null;
+    #[ORM\Column(length: 30)]
+    private ?string $prenomReferent = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $adresseRef = null;
+    #[ORM\Column(length: 35)]
+    private ?string $mailReferent = null;
 
     #[ORM\Column(length: 10)]
-    private ?string $telephoneRef = null;
+    private ?string $telephoneReferent = null;
 
     #[ORM\ManyToOne(inversedBy: 'referent')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Etablissement $etablissement = null;
+
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'referent')]
+    private Collection $formation;
+
+    public function __construct()
+    {
+        $this->formation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomRef(): ?string
+    public function getNomReferent(): ?string
     {
-        return $this->nomRef;
+        return $this->nomReferent;
     }
 
-    public function setNomRef(string $nomRef): self
+    public function setNomReferent(string $nomReferent): self
     {
-        $this->nomRef = $nomRef;
+        $this->nomReferent = $nomReferent;
 
         return $this;
     }
 
-    public function getPrenomRef(): ?string
+    public function getPrenomReferent(): ?string
     {
-        return $this->prenomRef;
+        return $this->prenomReferent;
     }
 
-    public function setPrenomRef(string $prenomRef): self
+    public function setPrenomReferent(string $prenomReferent): self
     {
-        $this->prenomRef = $prenomRef;
+        $this->prenomReferent = $prenomReferent;
 
         return $this;
     }
 
-    public function getAdresseRef(): ?string
+    public function getMailReferent(): ?string
     {
-        return $this->adresseRef;
+        return $this->mailReferent;
     }
 
-    public function setAdresseRef(string $adresseRef): self
+    public function setMailReferent(string $mailReferent): self
     {
-        $this->adresseRef = $adresseRef;
+        $this->mailReferent = $mailReferent;
 
         return $this;
     }
 
-    public function getTelephoneRef(): ?string
+    public function getTelephoneReferent(): ?string
     {
-        return $this->telephoneRef;
+        return $this->telephoneReferent;
     }
 
-    public function setTelephoneRef(string $telephoneRef): self
+    public function setTelephoneReferent(string $telephoneReferent): self
     {
-        $this->telephoneRef = $telephoneRef;
+        $this->telephoneReferent = $telephoneReferent;
 
         return $this;
     }
@@ -90,6 +99,33 @@ class Referent
     public function setEtablissement(?Etablissement $etablissement): self
     {
         $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormation(): Collection
+    {
+        return $this->formation;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formation->contains($formation)) {
+            $this->formation->add($formation);
+            $formation->addReferent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formation->removeElement($formation)) {
+            $formation->removeReferent($this);
+        }
 
         return $this;
     }
