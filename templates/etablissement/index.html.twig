@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EtablissementController!{% endblock %}
+{% block title %}Etablissement index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Etablissement index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomEtablissement</th>
+                <th>AdresseEtablissement</th>
+                <th>TelephoneEtablissement</th>
+                <th>VilleEtablissement</th>
+                <th>SiteEtablissement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etablissement in etablissements %}
+            <tr>
+                <td>{{ etablissement.id }}</td>
+                <td>{{ etablissement.nomEtablissement }}</td>
+                <td>{{ etablissement.adresseEtablissement }}</td>
+                <td>{{ etablissement.telephoneEtablissement }}</td>
+                <td>{{ etablissement.villeEtablissement }}</td>
+                <td>{{ etablissement.siteEtablissement }}</td>
+                <td>
+                    <a href="{{ path('app_etablissement_show', {'id': etablissement.id}) }}">show</a>
+                    <a href="{{ path('app_etablissement_edit', {'id': etablissement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/sitePostBac/src/Controller/EtablissementController.php'|file_link(0) }}">src/Controller/EtablissementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/sitePostBac/templates/etablissement/index.html.twig'|file_link(0) }}">templates/etablissement/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_etablissement_new') }}">Create new</a>
 {% endblock %}

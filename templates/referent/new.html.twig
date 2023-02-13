@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Referent{% endblock %}
+
+{% block body %}
+    <h1>Create new Referent</h1>
+
+    {{ include('referent/_form.html.twig') }}
+
+    <a href="{{ path('app_referent_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormationEtablissement index{% endblock %}
+
+{% block body %}
+    <h1>FormationEtablissement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SiteWeb</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation_etablissement in formation_etablissements %}
+            <tr>
+                <td>{{ formation_etablissement.id }}</td>
+                <td>{{ formation_etablissement.siteWeb }}</td>
+                <td>
+                    <a href="{{ path('app_formation_etablissement_show', {'id': formation_etablissement.id}) }}">show</a>
+                    <a href="{{ path('app_formation_etablissement_edit', {'id': formation_etablissement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formation_etablissement_new') }}">Create new</a>
+{% endblock %}
