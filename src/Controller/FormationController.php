@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
-use App\Form\Formation1Type;
+use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class FormationController extends AbstractController
     public function new(Request $request, FormationRepository $formationRepository): Response
     {
         $formation = new Formation();
-        $form = $this->createForm(Formation1Type::class, $formation);
+        $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class FormationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_formation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
-        $form = $this->createForm(Formation1Type::class, $formation);
+        $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Etablissement;
-use App\Form\Etablissement1Type;
+use App\Form\EtablissementType;
 use App\Repository\EtablissementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class EtablissementController extends AbstractController
     public function new(Request $request, EtablissementRepository $etablissementRepository): Response
     {
         $etablissement = new Etablissement();
-        $form = $this->createForm(Etablissement1Type::class, $etablissement);
+        $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class EtablissementController extends AbstractController
     #[Route('/{id}/edit', name: 'app_etablissement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Etablissement $etablissement, EtablissementRepository $etablissementRepository): Response
     {
-        $form = $this->createForm(Etablissement1Type::class, $etablissement);
+        $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

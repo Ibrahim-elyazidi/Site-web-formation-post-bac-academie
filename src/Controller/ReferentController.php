@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Referent;
-use App\Form\Referent1Type;
+use App\Form\ReferentType;
 use App\Repository\ReferentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class ReferentController extends AbstractController
     public function new(Request $request, ReferentRepository $referentRepository): Response
     {
         $referent = new Referent();
-        $form = $this->createForm(Referent1Type::class, $referent);
+        $form = $this->createForm(ReferentType::class, $referent);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class ReferentController extends AbstractController
     #[Route('/{id}/edit', name: 'app_referent_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Referent $referent, ReferentRepository $referentRepository): Response
     {
-        $form = $this->createForm(Referent1Type::class, $referent);
+        $form = $this->createForm(ReferentType::class, $referent);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

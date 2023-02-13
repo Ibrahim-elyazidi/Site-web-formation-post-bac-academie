@@ -13,14 +13,14 @@ class DepartementType extends AbstractType
     {
         $builder
             ->add('num')
-            ->add('nom') 
+            ->add('nom')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Departement::class,x
+            'data_class' => Departement::class,
         ]);
     }
 }

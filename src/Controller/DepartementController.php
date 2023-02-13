@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Departement;
-use App\Form\Departement1Type;
+use App\Form\DepartementType;
 use App\Repository\DepartementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class DepartementController extends AbstractController
     public function new(Request $request, DepartementRepository $departementRepository): Response
     {
         $departement = new Departement();
-        $form = $this->createForm(Departement1Type::class, $departement);
+        $form = $this->createForm(DepartementType::class, $departement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class DepartementController extends AbstractController
     #[Route('/{id}/edit', name: 'app_departement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Departement $departement, DepartementRepository $departementRepository): Response
     {
-        $form = $this->createForm(Departement1Type::class, $departement);
+        $form = $this->createForm(DepartementType::class, $departement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
