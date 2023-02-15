@@ -8,24 +8,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NomEtablissement</th>
-                <th>AdresseEtablissement</th>
-                <th>TelephoneEtablissement</th>
-                <th>VilleEtablissement</th>
-                <th>SiteEtablissement</th>
+                
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Ville</th>
+                <th>Site</th>
+                <th>departement</th>
                 <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
         {% for etablissement in etablissements %}
             <tr>
-                <td>{{ etablissement.id }}</td>
+                
                 <td>{{ etablissement.nomEtablissement }}</td>
                 <td>{{ etablissement.adresseEtablissement }}</td>
                 <td>{{ etablissement.telephoneEtablissement }}</td>
                 <td>{{ etablissement.villeEtablissement }}</td>
                 <td>{{ etablissement.siteEtablissement }}</td>
+                <td>{{ etablissement.departement }}</td>
                 <td>
                     <a href="{{ path('app_etablissement_show', {'id': etablissement.id}) }}">show</a>
                     <a href="{{ path('app_etablissement_edit', {'id': etablissement.id}) }}">edit</a>

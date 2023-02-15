@@ -15,6 +15,4 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
-
-
 }

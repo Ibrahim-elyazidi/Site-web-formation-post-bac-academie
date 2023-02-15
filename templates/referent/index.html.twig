@@ -8,18 +8,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NomReferent</th>
-                <th>PrenomReferent</th>
-                <th>MailReferent</th>
-                <th>TelephoneReferent</th>
+                
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mail</th>
+                <th>Telephone</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for referent in referents %}
             <tr>
-                <td>{{ referent.id }}</td>
+                
                 <td>{{ referent.nomReferent }}</td>
                 <td>{{ referent.prenomReferent }}</td>
                 <td>{{ referent.mailReferent }}</td>

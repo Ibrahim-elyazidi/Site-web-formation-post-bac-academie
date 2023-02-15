@@ -129,4 +129,9 @@ class Referent
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getNomReferent() . $this->getPrenomReferent();
+    }
 }

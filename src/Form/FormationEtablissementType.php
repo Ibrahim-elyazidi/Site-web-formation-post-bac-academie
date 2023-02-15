@@ -13,8 +13,14 @@ class FormationEtablissementType extends AbstractType
     {
         $builder
             ->add('siteWeb')
-            ->add('formation')
-            ->add('etablissement')
+            ->add('formation',EntityType::Formation,[
+                'Formation'=> User::Formation,
+                'query_builder' => function (EntityRepository $er){
+                    return $er->createQueryBuilder('u')
+                    ->orderBy('u.formation','ASC');
+                },
+                'choice_label' => 'formation',
+            ])
         ;
     }
 
