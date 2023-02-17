@@ -1,20 +1,90 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}AccueilController!{% endblock %}
 
 {% block body %}
+
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .bigTitle { margin: 1em auto; max-width: 600px; width: 95%; font: 18px/1.5 sans-serif; }
+    .ajustTitle{margin: 1em auto; max-width: 600px; width: 95%; font: 18px/1.5 sans-serif; }
+    .border {background : #000; color: #fff}
+    .bigTitle code { background: #F5F5F5; padding: 2px 6px; }
+    .bloc{display:flex; flex-direction:column;align-items: center;}
+    .select{font-size:1.2em;}
+    .button{align-items:center;}
 </style>
+<div class="bigTitle">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/sitePostBac/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/sitePostBac/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/accueil">Accueil</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/etablissement">Etablissement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/referent">Referent</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current ="page" href="/formation">Formation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/departement">Departement</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+</nav>
+
+<center><h1> Toutes nos formations </h1></center>
+
+<br><br>
+
+<div class="bloc">
+<div class = "select">
+<label for="formation-select">Formation : 
+</label>
+
+<select name="formations" id="formation-select">
+  <option value="">--Merci de choisir une formation--</option>
+    {% for formation in formations %}
+    <option value>{{formation.intituleFormation}}</option>
+    {% endfor %}
+  </select>
+
+
+  <label for="departement-select">Departement : 
+</label>
+
+<select name="departement" id="departement-select">
+  <option value="">--Merci de choisir un departement--</option>
+    {% for departement in departements %}
+    <option value>{{departement.num}}</option>
+    {% endfor %}
+  </select>
+</div>
+</div>
+<br><br>
+<div class="well" >
+    <center><input type="submit" class="btn btn-primary"/></center>
+
+
+    {% for etablissement in etablissements %}
+    
+    {{etablissement.nomEtablissement}}
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
 {% endblock %}
