@@ -15,6 +15,7 @@
                 <th>Ville</th>
                 <th>Site</th>
                 <th>departement</th>
+                <th>formation</th>
                 <th>actions</th>
 
             </tr>
@@ -28,7 +29,10 @@
                 <td>{{ etablissement.telephoneEtablissement }}</td>
                 <td>{{ etablissement.villeEtablissement }}</td>
                 <td>{{ etablissement.siteEtablissement }}</td>
-                <td>{{ etablissement.departement }}</td>
+                <td>{{ etablissement.departement}}</td>
+
+                
+
                 <td>
                     <a href="{{ path('app_etablissement_show', {'id': etablissement.id}) }}">show</a>
                     <a href="{{ path('app_etablissement_edit', {'id': etablissement.id}) }}">edit</a>

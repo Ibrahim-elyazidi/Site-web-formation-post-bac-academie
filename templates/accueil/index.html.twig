@@ -71,15 +71,14 @@
 </div>
 </div>
 <br><br>
-<div class="well" >
-    <center><input type="submit" class="btn btn-primary"/></center>
-
 
     {% for etablissement in etablissements %}
-    
-    {{etablissement.nomEtablissement}}
+        {{ etablissement.adresseEtablissement }}
+        {{ etablissement.telephoneEtablissement }}
+        {{ etablissement.villeEtablissement }}
+        {{ etablissement.siteEtablissement }}
+        {{ etablissement.departement }}
     {% endfor %}
-</div>
 
 
 
